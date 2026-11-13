@@ -35,19 +35,47 @@ return {
     end,
   },
 
-  -- 状态栏 / 标签栏 / 滚动条 / 通知 / 按键提示
+  -- 状态栏 / 缓冲区标签栏（lualine + bufferline，稳定且好看）
   {
-    'wsdjeg/statusline.nvim',
-    event = 'VimEnter',
-    config = function()
-      require('statusline').setup({ separator = 'arrow', iseparator = 'arrow' })
-    end,
+    'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      options = {
+        theme = 'onedark',
+        globalstatus = true,
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = { { 'filename', path = 1 } },
+        lualine_x = { 'diagnostics', 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+      },
+    },
   },
   {
-    'wsdjeg/tabline.nvim',
+    'akinsho/bufferline.nvim',
     event = 'VeryLazy',
-    config = function()
-      require('tabline').setup()
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      options = {
+        mode = 'buffers',
+        separator_style = 'slant',
+        show_buffer_close_icons = true,
+        show_close_icon = false,
+        always_show_bufferline = true,
+      },
+    },
+    config = function(_, opts)
+      require('bufferline').setup(opts)
+      vim.opt.showtabline = 2
+      for i = 1, 9 do
+        vim.keymap.set('n', '<leader>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>', { desc = '第 ' .. i .. ' 个 buffer' })
+      end
     end,
   },
   {

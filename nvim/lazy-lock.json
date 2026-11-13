@@ -2,6 +2,7 @@
   "altf.nvim": { "branch": "master", "commit": "ea3479cb8e77c87b5ec0754fbeeba1fc72dbcbcd" },
   "bookmarks.nvim": { "branch": "master", "commit": "88ee3a7195ffb9cdc39871b7161ad90fa6fd590e" },
   "bufdel.nvim": { "branch": "master", "commit": "ac9a53e1f20deb82fdd942b71a4daa9e7b0a6720" },
+  "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "chineselinter.nvim": { "branch": "master", "commit": "64f5b7363e7abc1033bb6dc068fff58fef1810e7" },
   "code-runner.nvim": { "branch": "master", "commit": "d1910bac0d4ed7db6b3ccad2c9ade022b6bb7220" },
   "ctags.nvim": { "branch": "master", "commit": "f5e5131fd9651d24a21ed22ac2346546fb27df0e" },
@@ -15,6 +16,7 @@
   "job.nvim": { "branch": "master", "commit": "edfe5a96ce9314869f5cb2998490c3cf5d3e29e4" },
   "keymap-guide.nvim": { "branch": "master", "commit": "21bc257be3646ccf9718445f389a65eaa40ccecc" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "lualine.nvim": { "branch": "master", "commit": "221ce6b2d999187044529f49da6554a92f740a96" },
   "mru.nvim": { "branch": "master", "commit": "e3bffd97d3c347fafc21ebe4032e55baa1abe8b9" },
   "notify.nvim": { "branch": "master", "commit": "33be3b1be70c8b81b901c9748ba8c2cc88b2d5c1" },
   "nvim-tree.lua": { "branch": "master", "commit": "5cc8d425c2bf3c09041a2db3cfff6197e2dce34d" },
@@ -26,9 +28,6 @@
   "scratch.nvim": { "branch": "master", "commit": "9e96a6a297dd09c1d557eba200c6d21ebacad775" },
   "scrollbar.nvim": { "branch": "master", "commit": "aee3842ce18d1db85f2b323ea3e03c497f97019c" },
   "smart-ime.nvim": { "branch": "master", "commit": "5794d778f59ea1e0c66a140410fa26b62af35577" },
-  "statusline.nvim": { "branch": "master", "commit": "ba5d49d8807d6c84d218fbdd73e0d684fffcc6e1" },
-  "tabline.nvim": { "branch": "master", "commit": "9edcd2eae3bf16ea18c6ea87f7d975f26efd8f30" },
-  "tasks.nvim": { "branch": "master", "commit": "81ea36d8a9c930a3afe7fb43105f6d7c46d36ef1" },
   "terminal.nvim": { "branch": "master", "commit": "7b305b4d54ee5f4078f0e80e566d4567fc0c840a" },
   "todo.nvim": { "branch": "master", "commit": "8d247407db56522da7660eba422267e7419d8495" }
 }
