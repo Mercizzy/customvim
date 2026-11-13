@@ -1,0 +1,50 @@
+{
+  // coc.nvim 配置（放在 ~/.vim/coc-settings.json，:CocConfig 打开）
+  "suggest.noselect": false,
+  "suggest.enablePreview": false,
+  "suggest.maxCompleteItemCount": 20,
+
+  "diagnostic.enable": true,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign": "▲",
+  "diagnostic.infoSign": "»",
+  "diagnostic.hintSign": "▪",
+  "diagnostic.checkCurrentLine": true,
+
+  // 保存时自动格式化（不需要就删掉对应语言）
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "json",
+    "jsonc",
+    "css",
+    "scss",
+    "html",
+    "yaml",
+    "markdown"
+  ],
+
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": false,
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "relative",
+
+  "clangd.arguments": [
+    "--clang-tidy",
+    "--background-index",
+    "--header-insertion=never",
+    "--completion-style=detailed"
+  ],
+
+  "rust-analyzer.checkOnSave.command": "clippy",
+
+  "snippets.userSnippetsDirectory": "~/.vim/snippets",
+  "coc.preferences.formatOnType": true
+}
