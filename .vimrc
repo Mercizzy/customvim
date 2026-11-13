@@ -312,8 +312,21 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks', 'header': ['   书签'] },
       \ ]
 let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'t': '~/.tmux.conf'} ]
-let g:startify_custom_header = []
-autocmd VimEnter * if !argc() && exists(':Startify') | Startify | endif
+let g:startify_files_number = 8
+let g:startify_padding_left = 3
+let g:startify_change_to_vcs_root = 0
+let g:startify_custom_header = [
+      \ '   ╭──────────────────────────────────────────╮',
+      \ '   │   c u s t o m v i m                      │',
+      \ '   │   Vim 9 · tmux · LSP · fzf               │',
+      \ '   ╰──────────────────────────────────────────╯',
+      \ '',
+      \ ]
+
+" 无参数启动：左文件树 + 右起始页（IDE 布局），光标停在起始页
+autocmd VimEnter * if !argc() && exists(':Startify') && exists(':NERDTree')
+      \ | Startify | NERDTree | wincmd p
+      \ | endif
 
 " ---- gitgutter --------------------------------------------------------------
 set updatetime=300
