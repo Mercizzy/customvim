@@ -26,7 +26,7 @@
   "nvim-treesitter": { "branch": "main", "commit": "60c0f468de3e636fa660a419d537e8033aca4e39" },
   "nvim-web-devicons": { "branch": "master", "commit": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c" },
   "onedark.nvim": { "branch": "master", "commit": "df4792accde9db0043121f32628bcf8e645d9aea" },
-  "picker.nvim": { "branch": "master", "commit": "b1a664d44ed32b603193a88cfcf546dbc9e2e12f" },
+  "picker.nvim": { "branch": "master", "commit": "ce799711d5fe3b252f0487b105ecaa4d44a27c6f" },
   "quickfix.nvim": { "branch": "master", "commit": "344b39731cfb1f36195b820894f8c3dadc65b27c" },
   "rooter.nvim": { "branch": "master", "commit": "e052796c241d244446e670f1216e73d8ab3e121f" },
   "scratch.nvim": { "branch": "master", "commit": "9e96a6a297dd09c1d557eba200c6d21ebacad775" },
@@ -34,5 +34,6 @@
   "smart-ime.nvim": { "branch": "master", "commit": "5794d778f59ea1e0c66a140410fa26b62af35577" },
   "terminal.nvim": { "branch": "master", "commit": "7b305b4d54ee5f4078f0e80e566d4567fc0c840a" },
   "todo.nvim": { "branch": "master", "commit": "8d247407db56522da7660eba422267e7419d8495" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432" }
+  "vim-tmux-navigator": { "branch": "master", "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432" },
+  "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }

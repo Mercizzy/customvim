@@ -104,5 +104,23 @@ return {
       require('notify').setup({})
     end,
   },
+  -- 快捷键提示：按 <Space> 停顿一下自动弹菜单，<Space>? 手动打开完整列表
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    config = function()
+      local wk = require('which-key')
+      wk.setup({
+        preset = 'modern',
+        delay = 400,
+        win = { border = 'rounded' },
+        icons = { breadcrumb = '»', separator = '➜ ' },
+      })
+      wk.add({
+        { '<leader>?', function() wk.show({ global = false }) end, desc = '显示所有快捷键' },
+      })
+    end,
+  },
+  -- SpaceVim 的键位引导插件（保留，按前缀触发老式指南）
   { 'wsdjeg/keymap-guide.nvim', event = 'VeryLazy' },
 }
