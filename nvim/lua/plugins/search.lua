@@ -21,10 +21,13 @@ return {
             -- 上下方向键：映射到 picker 自己的 Tab / S-Tab
             vim.keymap.set('i', '<Down>', '<Tab>', { buffer = buf, remap = true })
             vim.keymap.set('i', '<Up>', '<S-Tab>', { buffer = buf, remap = true })
+            -- Ctrl-j / Ctrl-k 当上下选择用（j/k 本身要留给模糊搜索输入）
+            vim.keymap.set('i', '<C-j>', '<Tab>', { buffer = buf, remap = true })
+            vim.keymap.set('i', '<C-k>', '<S-Tab>', { buffer = buf, remap = true })
             vim.api.nvim_echo({
               { '  Esc / Ctrl-C 关闭   ', 'Comment' },
               { 'Enter 打开   ', 'Comment' },
-              { 'Tab / Shift-Tab 选择   ', 'Comment' },
+              { 'Tab / Shift-Tab / Ctrl-j / Ctrl-k 选择   ', 'Comment' },
               { 'Ctrl-P 预览', 'Comment' },
             }, false, {})
           end
