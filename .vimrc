@@ -173,11 +173,9 @@ nnoremap <leader>cv :source $MYVIMRC<CR>:messages<CR>
 " -----------------------------------------------------------------------------
 " 6. 插件（vim-plug）
 " -----------------------------------------------------------------------------
-" 首次运行自动安装 vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" Skip the plugin block when vim-plug is not installed (machine moved to Neovim).
+if empty(glob("~/.vim/autoload/plug.vim"))
+  finish
 endif
 
 call plug#begin('~/.vim/plugged')
