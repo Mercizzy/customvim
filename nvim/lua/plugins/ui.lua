@@ -6,8 +6,20 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require('onedark').setup({ style = 'dark' })
+      require('onedark').setup({ style = 'dark', transparent = false })
       require('onedark').load()
+
+      -- 侧边栏/浮窗背景和编辑器保持一致，避免左右两块颜色不同产生割裂感
+      local blend = function()
+        local bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
+        vim.api.nvim_set_hl(0, 'NvimTreeNormal', { bg = bg })
+        vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { bg = bg })
+        vim.api.nvim_set_hl(0, 'NvimTreeEndOfBuffer', { bg = bg })
+        vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = bg, fg = '#3E4451' })
+        vim.api.nvim_set_hl(0, 'DashboardNormal', { bg = bg })
+      end
+      vim.api.nvim_create_autocmd('ColorScheme', { callback = blend, desc = '侧边栏背景跟随编辑器' })
+      blend()
     end,
   },
   { 'nvim-tree/nvim-web-devicons', lazy = true },

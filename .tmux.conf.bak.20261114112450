@@ -1,0 +1,138 @@
+# =============================================================================
+#  .tmux.conf —— 面向“一个项目一个会话”的开发工作流
+#  前缀键改为 C-a；C-h/j/k/l 在 vim 与 tmux 面板之间无缝移动
+#  重载：tmux source-file ~/.tmux.conf   （或 prefix + r）
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. 基础
+# -----------------------------------------------------------------------------
+set -g default-shell /bin/bash
+set -g default-terminal "tmux-256color"
+set -g escape-time 10
+set -g focus-events on
+set -g history-limit 50000
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+set -g mouse on
+set -g set-clipboard on
+set -g allow-passthrough on
+set -g detach-on-destroy off
+setw -g automatic-rename on
+set -g allow-rename off
+set -g visual-activity off
+set -g visual-bell off
+set -g set-titles on
+set -g set-titles-string "#S | #W"
+
+# 真彩色（Vim 的 termguicolors 依赖它）
+set -as terminal-features ",*:RGB"
+set -as terminal-overrides ",*:Tc"
+
+# 前缀键：C-a（比 C-b 顺手；原 C-b 仍可透传给内层程序）
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+
+# 重载配置
+bind r source-file ~/.tmux.conf \; display-message "tmux 配置已重载"
+
+# -----------------------------------------------------------------------------
+# 2. 分屏
+# -----------------------------------------------------------------------------
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
+# 面板切换：用 vim 风格的 C-h/j/k/l（与 vim-tmux-navigator 联动）
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\S+\/)?g?(view|n?vim?x?)(diff)?$'"
+bind -n C-h if-shell "$is_vim" "send-keys C-h"  "select-pane -L"
+bind -n C-j if-shell "$is_vim" "send-keys C-j"  "select-pane -D"
+bind -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
+bind -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
+
+# 面板大小调整（前缀 + H/J/K/L）
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# 面板最大化 / 还原
+bind m resize-pane -Z
+
+# -----------------------------------------------------------------------------
+# 3. 复制模式（vi 风格，复制到 Windows 剪贴板）
+# -----------------------------------------------------------------------------
+setw -g mode-keys vi
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi V send -X select-line
+bind -T copy-mode-vi C-v send -X rectangle-toggle
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "win32yank.exe -i --crlf"
+bind -T copy-mode-vi Y send -X copy-pipe-and-cancel "win32yank.exe -i --crlf"
+bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "win32yank.exe -i --crlf"
+bind -T copy-mode-vi Escape send -X cancel
+
+# 双击 / 三击选择
+bind -T copy-mode-vi DoubleClick1Pane send -X select-word
+bind -T copy-mode-vi TripleClick1Pane send -X select-line
+
+# -----------------------------------------------------------------------------
+# 4. 会话与项目
+# -----------------------------------------------------------------------------
+# prefix + f：模糊选择项目目录，自动 attach/切换对应会话
+bind f display-popup -E -w 80% -h 60% -T " 选择项目 " "$HOME/.local/bin/tmux-sessionizer"
+
+# 快速新建/切换会话列表
+bind s choose-tree -Zs
+
+# 保持窗口序号不跳动
+set -g renumber-windows on
+
+# -----------------------------------------------------------------------------
+# 5. 外观
+# -----------------------------------------------------------------------------
+set -g status-interval 5
+set -g status-position bottom
+set -g status-justify left
+set -g status-style "bg=#1e2127,fg=#abb2bf"
+set -g status-left-length 40
+set -g status-right-length 80
+
+set -g status-left "#[bg=#98c379,fg=#1e2127,bold]  #S  #[bg=#1e2127,fg=#abb2bf] "
+set -g status-right "#[fg=#56b6c2]#{?client_prefix,#[bg=#e06c75,fg=#1e2127] PREFIX ,#[fg=#56b6c2]} #[fg=#abb2bf]%H:%M #[fg=#5c6370]| %m-%d "
+
+set -g window-status-format         " #I:#W "
+set -g window-status-current-format " #I:#W "
+set -g window-status-style          "fg=#5c6370,bg=#1e2127"
+set -g window-status-current-style  "fg=#1e2127,bg=#61afef,bold"
+set -g window-status-activity-style "fg=#e5c07b,bg=#1e2127"
+
+set -g pane-border-style        "fg=#3e4451"
+set -g pane-active-border-style "fg=#61afef"
+
+set -g message-style         "bg=#3e4451,fg=#abb2bf"
+set -g message-command-style "bg=#3e4451,fg=#abb2bf"
+
+# -----------------------------------------------------------------------------
+# 6. 插件（tpm）
+# -----------------------------------------------------------------------------
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+
+# 自动保存/恢复会话（跨重启保留工作现场）
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '15'
+set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-strategy-vim 'session'
+set -g @resurrect-strategy-nvim 'session'
+
+# 前缀提示（状态栏）
+set -g @prefix_highlight_fg '#1e2127'
+set -g @prefix_highlight_bg '#e06c75'
+
+# 初始化 tpm（必须放在最后）
+run '~/.tmux/plugins/tpm/tpm'
