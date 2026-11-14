@@ -19,9 +19,9 @@ map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = '文件树' })
 map('n', '<leader>o', '<cmd>NvimTreeFindFile<cr>', { desc = '在树中定位当前文件' })
 
 -- 模糊搜索（picker.nvim）
-map('n', '<leader>ff', '<cmd>Picker files<cr>', { desc = '找文件' })
-map('n', '<leader>fb', '<cmd>Picker buffers<cr>', { desc = '切 buffer' })
-map('n', '<leader>fr', '<cmd>Picker mru<cr>', { desc = '最近文件' })
+map("n", "<leader>ff", "<cmd>lua CustomPicker('files')<cr>", { desc = "找文件" })
+map("n", "<leader>fb", "<cmd>lua CustomPicker('buffers')<cr>", { desc = "切 buffer" })
+map("n", "<leader>fr", "<cmd>lua CustomPicker('mru')<cr>", { desc = "最近文件" })
 map('n', '<leader>fg', '<cmd>FlyGrep<cr>', { desc = '项目内搜索' })
 
 -- Git

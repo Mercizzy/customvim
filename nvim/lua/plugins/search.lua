@@ -10,6 +10,23 @@ return {
     dependencies = { 'wsdjeg/job.nvim' },
     config = function()
       require('picker').setup()
+
+      -- 统一入口：打开后补上 Ctrl-C 关闭 + 快捷键提示
+      _G.CustomPicker = function(name)
+        vim.cmd('Picker ' .. name)
+        vim.schedule(function()
+          local buf = vim.api.nvim_get_current_buf()
+          if vim.bo[buf].filetype == 'picker-prompt' then
+            vim.keymap.set('i', '<C-c>', '<Esc>', { buffer = buf, remap = true })
+            vim.api.nvim_echo({
+              { '  Esc / Ctrl-C 关闭   ', 'Comment' },
+              { 'Enter 打开   ', 'Comment' },
+              { 'Tab / Shift-Tab 选择   ', 'Comment' },
+              { 'Ctrl-P 预览', 'Comment' },
+            }, false, {})
+          end
+        end)
+      end
     end,
   },
 
