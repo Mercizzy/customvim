@@ -1,25 +1,26 @@
 -- 界面：配色、状态栏、标签栏、启动页、文件树、滚动条、通知
 return {
-  -- 配色（和之前 Vim 一致的 onedark）
+  -- 配色：Catppuccin Mocha（与 tmux 状态栏、Windows Terminal 一致）
   {
-    'navarasu/onedark.nvim',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     lazy = false,
     priority = 1000,
     config = function()
-      require('onedark').setup({ style = 'dark', transparent = false })
-      require('onedark').load()
-
-      -- 侧边栏/浮窗背景和编辑器保持一致，避免左右两块颜色不同产生割裂感
-      local blend = function()
-        local bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
-        vim.api.nvim_set_hl(0, 'NvimTreeNormal', { bg = bg })
-        vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { bg = bg })
-        vim.api.nvim_set_hl(0, 'NvimTreeEndOfBuffer', { bg = bg })
-        vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = bg, fg = '#3E4451' })
-        vim.api.nvim_set_hl(0, 'DashboardNormal', { bg = bg })
-      end
-      vim.api.nvim_create_autocmd('ColorScheme', { callback = blend, desc = '侧边栏背景跟随编辑器' })
-      blend()
+      require('catppuccin').setup({
+        flavour = 'mocha',
+        transparent_background = false,
+        integrations = {
+          nvimtree = true,
+          dashboard = true,
+          bufferline = true,
+          treesitter = true,
+          gitsigns = true,
+          lsp_trouble = false,
+          native_lsp = { enabled = true },
+        },
+      })
+      vim.cmd.colorscheme('catppuccin')
     end,
   },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -54,7 +55,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
-        theme = 'onedark',
+        theme = 'catppuccin',
         globalstatus = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },

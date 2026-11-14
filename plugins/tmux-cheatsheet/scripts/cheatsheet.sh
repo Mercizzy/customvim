@@ -143,7 +143,6 @@ colors = (
 
 subprocess.run(
     ["fzf", "--ansi", "--no-sort", "--height=100%", "--layout=reverse",
-     "--border=rounded", "--border-label= 快捷键 ", "--border-label-pos=2",
      "--prompt= 搜索 > ", "--pointer=▸ ", "--marker=▌",
      "--header=输入关键字过滤 · Esc 关闭", colors],
     input=text, text=True,

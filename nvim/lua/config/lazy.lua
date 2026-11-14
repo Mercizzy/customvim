@@ -19,7 +19,7 @@ require('lazy').setup({
   spec = {
     { import = 'plugins' },   -- lua/plugins/ 下的每个文件就是一类插件
   },
-  install = { colorscheme = { 'onedark', 'habamax' } },
+  install = { colorscheme = { 'catppuccin', 'habamax' } },
   checker = { enabled = false },          -- 不自动检查更新，避免启动卡网络
   change_detection = { notify = false },  -- 改配置后不弹提示
   ui = { border = 'rounded' },
