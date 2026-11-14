@@ -41,4 +41,14 @@ return {
 
   -- quickfix 美化
   { 'wsdjeg/quickfix.nvim', event = 'VeryLazy' },
+
+  -- tmux 与 Neovim 窗口无缝切换：在 nvim 边缘窗口按 C-h/j/k/l 会切到相邻 tmux 面板
+  {
+    'christoomey/vim-tmux-navigator',
+    event = 'VeryLazy',
+    init = function()
+      vim.g.tmux_navigator_no_mappings = 0
+      vim.g.tmux_navigator_preserve_zoom = 1
+    end,
+  },
 }

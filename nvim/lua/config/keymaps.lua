@@ -43,5 +43,7 @@ map('n', '<A-l>', '<cmd>wincmd l<cr>', { desc = '右窗口' })
 map('n', '<leader>tt', '<cmd>Terminal<cr>', { desc = '浮动终端' })
 
 -- 格式化 / 运行
-map('n', '<leader>lf', function() require('format').format() end, { desc = '格式化当前文件' })
+map('n', '<leader>lf', function()
+  require('format').format(false, '', 1, vim.api.nvim_buf_line_count(0))
+end, { desc = '格式化当前文件' })
 map('n', '<leader>lr', '<cmd>RunCode<cr>', { desc = '运行当前文件' })
