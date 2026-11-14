@@ -32,8 +32,8 @@
   "scratch.nvim": { "branch": "master", "commit": "9e96a6a297dd09c1d557eba200c6d21ebacad775" },
   "scrollbar.nvim": { "branch": "master", "commit": "aee3842ce18d1db85f2b323ea3e03c497f97019c" },
   "smart-ime.nvim": { "branch": "master", "commit": "5794d778f59ea1e0c66a140410fa26b62af35577" },
-  "terminal.nvim": { "branch": "master", "commit": "7b305b4d54ee5f4078f0e80e566d4567fc0c840a" },
   "todo.nvim": { "branch": "master", "commit": "8d247407db56522da7660eba422267e7419d8495" },
+  "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
   "vim-tmux-navigator": { "branch": "master", "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }

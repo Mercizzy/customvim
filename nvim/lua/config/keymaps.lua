@@ -41,8 +41,7 @@ map('n', '<A-j>', '<cmd>wincmd j<cr>', { desc = '下窗口' })
 map('n', '<A-k>', '<cmd>wincmd k<cr>', { desc = '上窗口' })
 map('n', '<A-l>', '<cmd>wincmd l<cr>', { desc = '右窗口' })
 
--- 终端
-map('n', '<leader>tt', '<cmd>Terminal<cr>', { desc = '浮动终端' })
+-- 终端：由 toggleterm.nvim 的 keys 懒加载绑定（Space t t / t h / t v）
 
 -- 格式化 / 运行
 map('n', '<leader>lf', function()
