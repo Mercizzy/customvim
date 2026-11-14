@@ -21,6 +21,21 @@ return {
         },
       })
       vim.cmd.colorscheme('catppuccin')
+
+      -- 侧边栏 / 状态栏背景跟随编辑区，整屏只有一个底色
+      local function unify_bg()
+        local bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
+        for _, g in ipairs({
+          'NvimTreeNormal', 'NvimTreeNormalNC', 'NvimTreeEndOfBuffer',
+          'StatusLine', 'StatusLineNC', 'DashboardNormal',
+        }) do
+          local hl = vim.api.nvim_get_hl(0, { name = g })
+          vim.api.nvim_set_hl(0, g, { bg = bg, fg = hl.fg })
+        end
+        vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = bg, fg = '#45475a' })
+      end
+      vim.api.nvim_create_autocmd('ColorScheme', { callback = unify_bg, desc = '统一侧边栏背景' })
+      unify_bg()
     end,
   },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -31,10 +46,26 @@ return {
     cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeOpen' },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
-      view = { width = 32 },
-      renderer = { group_empty = true, highlight_git = true },
-      filters = { dotfiles = false },
-      git = { enable = true, ignore = false },
+      view = { width = 30 },
+      renderer = {
+        group_empty = true,
+        highlight_git = true,
+        root_folder_label = false,
+        indent_markers = { enable = true, inline_arrows = true },
+        icons = {
+          show = { file = true, folder = true, folder_arrow = true, git = true },
+          glyphs = {
+            git = {
+              unstaged = '✗', staged = '✓', unmerged = '', renamed = '➜',
+              untracked = '★', deleted = '✖', ignored = '◌',
+            },
+          },
+        },
+      },
+      update_focused_file = { enable = true, update_root = false },
+      filters = { dotfiles = true, git_ignored = true },
+      git = { enable = true, ignore = true },
+      actions = { open_file = { quit_on_open = false } },
     },
   },
 
@@ -55,7 +86,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
-        theme = 'catppuccin',
+        theme = 'auto', -- 实际主题在下面的 config 里用 catppuccin 的调色板覆盖
         globalstatus = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
@@ -69,6 +100,11 @@ return {
         lualine_z = { 'location' },
       },
     },
+    config = function(_, opts)
+      -- 官方 catppuccin 调色板生成 lualine 主题，保证和编辑器一个色系
+      opts.options.theme = require('catppuccin.utils.lualine')()
+      require('lualine').setup(opts)
+    end,
   },
   {
     'akinsho/bufferline.nvim',
@@ -112,13 +148,30 @@ return {
     config = function()
       local wk = require('which-key')
       wk.setup({
-        preset = 'modern',
+        preset = "classic",
         delay = 400,
-        win = { border = 'rounded' },
-        icons = { breadcrumb = '»', separator = '➜ ' },
+        win = {
+          border = 'rounded',
+          padding = { 0, 1 },
+          width = { min = 48, max = 92 },
+        },
+        layout = { spacing = 4, align = 'center' },
+        icons = {
+          breadcrumb = '»',
+          separator = '→',
+          group = '▸',
+          mappings = false, -- 不显示每个按键的插件图标，只保留文字说明
+          keys = { CR = 'Enter ', Esc = 'Esc ', BS = 'Bksp ', Tab = 'Tab ' },
+        },
       })
       wk.add({
         { '<leader>?', function() wk.show({ global = false }) end, desc = '显示所有快捷键' },
+        { '<leader>f', group = '查找' },
+        { '<leader>g', group = 'Git' },
+        { '<leader>s', group = '分屏' },
+        { '<leader>l', group = '代码 / 运行' },
+        { '<leader>t', group = '工具' },
+        { '<leader>r', group = '重载' },
       })
     end,
   },

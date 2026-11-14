@@ -61,3 +61,7 @@ end
 -- 关闭内置的 netrw 文件浏览（用 nvim-tree 替代）
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- :grep / :vimgrep 走 ripgrep（结果进 quickfix，可 :cnext 跳转）
+vim.o.grepprg = 'rg --vimgrep --smart-case --hidden -g "!.git"'
+vim.o.grepformat = '%f:%l:%c:%m'

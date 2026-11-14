@@ -15,7 +15,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
     if vim.fn.argc() == 0 and vim.fn.exists(':NvimTreeOpen') == 2 then
       vim.schedule(function()
-        pcall(vim.cmd, 'NvimTreeOpen')
+        if pcall(vim.cmd, 'NvimTreeOpen') then
+          pcall(vim.cmd, 'wincmd p') -- 光标留在右侧（dashboard / 编辑区）
+        end
       end)
     end
   end,
