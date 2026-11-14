@@ -28,6 +28,7 @@ return {
         for _, g in ipairs({
           'NvimTreeNormal', 'NvimTreeNormalNC', 'NvimTreeEndOfBuffer',
           'StatusLine', 'StatusLineNC', 'DashboardNormal',
+          'NormalFloat', 'FloatBorder', 'FloatTitle',
         }) do
           local hl = vim.api.nvim_get_hl(0, { name = g })
           vim.api.nvim_set_hl(0, g, { bg = bg, fg = hl.fg })
@@ -123,7 +124,7 @@ return {
       require('bufferline').setup(opts)
       vim.opt.showtabline = 2
       for i = 1, 9 do
-        vim.keymap.set('n', '<leader>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>', { desc = '第 ' .. i .. ' 个 buffer' })
+        vim.keymap.set('n', '<leader>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>', { desc = '标签 ' .. i .. '（buffer）' })
       end
     end,
   },
@@ -165,7 +166,6 @@ return {
         },
       })
       wk.add({
-        { '<leader>?', function() wk.show({ global = false }) end, desc = '显示所有快捷键' },
         { '<leader>f', group = '查找' },
         { '<leader>g', group = 'Git' },
         { '<leader>s', group = '分屏' },

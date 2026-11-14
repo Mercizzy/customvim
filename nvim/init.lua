@@ -13,3 +13,8 @@ require('config.options')
 require('config.keymaps')
 require('config.autocmds')
 require('config.lazy')
+
+-- :Keys 快捷键总览（按插件分组），首次调用时才渲染窗口
+vim.api.nvim_create_user_command('Keys', function()
+  require('config.keysdoc').show()
+end, { desc = '快捷键总览' })

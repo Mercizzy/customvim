@@ -15,8 +15,10 @@ map('n', '<leader>sv', '<cmd>vsplit<cr>', { desc = '垂直分屏' })
 map('n', '<leader>sh', '<cmd>split<cr>', { desc = '水平分屏' })
 
 -- 文件树
-map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = '文件树' })
+map('n', '<C-b>', '<cmd>NvimTreeToggle<cr>', { desc = '文件树开关' })
 map('n', '<leader>o', '<cmd>NvimTreeFindFile<cr>', { desc = '在树中定位当前文件' })
+map('n', '<leader>bd', '<cmd>Bdelete<cr>', { desc = '关闭当前 buffer' })
+map('n', '<leader>?', function() require('config.keysdoc').show() end, { desc = '快捷键总览' })
 
 -- 模糊搜索（picker.nvim）
 map("n", "<leader>ff", "<cmd>lua CustomPicker('files')<cr>", { desc = "找文件" })
