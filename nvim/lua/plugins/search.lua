@@ -18,6 +18,9 @@ return {
           local buf = vim.api.nvim_get_current_buf()
           if vim.bo[buf].filetype == 'picker-prompt' then
             vim.keymap.set('i', '<C-c>', '<Esc>', { buffer = buf, remap = true })
+            -- 上下方向键：映射到 picker 自己的 Tab / S-Tab
+            vim.keymap.set('i', '<Down>', '<Tab>', { buffer = buf, remap = true })
+            vim.keymap.set('i', '<Up>', '<S-Tab>', { buffer = buf, remap = true })
             vim.api.nvim_echo({
               { '  Esc / Ctrl-C 关闭   ', 'Comment' },
               { 'Enter 打开   ', 'Comment' },
