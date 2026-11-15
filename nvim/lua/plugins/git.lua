@@ -1,14 +1,5 @@
--- Git：git.nvim（:Git 子命令）+ gitsigns（行内 diff 标记）
+-- Git：LazyGit（图形化操作）+ gitsigns（行内 diff 标记）
 return {
-  {
-    'wsdjeg/git.nvim',
-    cmd = { 'Git' },
-    config = function()
-      pcall(function()
-        require('git').setup()
-      end)
-    end,
-  },
   {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',

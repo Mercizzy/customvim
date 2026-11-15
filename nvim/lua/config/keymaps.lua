@@ -26,14 +26,7 @@ map("n", "<leader>fb", "<cmd>lua CustomPicker('buffers')<cr>", { desc = "切 buf
 map("n", "<leader>fr", "<cmd>lua CustomPicker('mru')<cr>", { desc = "最近文件" })
 map('n', '<leader>fg', '<cmd>FlyGrep<cr>', { desc = '项目内搜索' })
 
--- Git
-map('n', '<leader>gs', '<cmd>Git status<cr>', { desc = 'git status' })
-map('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = 'git commit' })
-map('n', '<leader>gp', '<cmd>Git push<cr>', { desc = 'git push' })
-map('n', '<leader>gP', '<cmd>Git pull<cr>', { desc = 'git pull' })
-map('n', '<leader>gd', '<cmd>Git diff<cr>', { desc = 'git diff' })
-map('n', '<leader>gl', '<cmd>Git log<cr>', { desc = 'git log' })
-map('n', '<leader>gb', '<cmd>Git blame<cr>', { desc = 'git blame' })
+-- Git（图形化操作走 LazyGit：Space gg / Space gG，键位在 plugins/git.lua 里注册）
 
 -- 窗口间移动（配合 tmux 的 C-h/j/k/l 时，Neovim 这边用 Alt 方向）
 map('n', '<A-h>', '<cmd>wincmd h<cr>', { desc = '左窗口' })
