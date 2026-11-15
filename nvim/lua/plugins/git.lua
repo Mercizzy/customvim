@@ -28,4 +28,17 @@ return {
       map('n', '<leader>hr', function() require('gitsigns').reset_hunk() end, { desc = '撤销改动' })
     end,
   },
+  {
+    'kdheepak/lazygit.nvim',
+    cmd = { 'LazyGit', 'LazyGitConfig', 'LazyGitCurrentFile', 'LazyGitFilter', 'LazyGitFilterCurrentFile' },
+    keys = {
+      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit（浮窗）' },
+      { '<leader>gG', '<cmd>tabnew | terminal lazygit<cr>', desc = 'LazyGit（全屏标签）' },
+    },
+    config = function()
+      vim.g.lazygit_floating_window_winblend = 0
+      vim.g.lazygit_floating_window_scaling_factor = 0.9
+      vim.g.lazygit_floating_window_border_chars = { '\u{256d}', '\u{2500}', '\u{256e}', '\u{2502}', '\u{256f}', '\u{2500}', '\u{2570}', '\u{2502}' }
+    end,
+  },
 }

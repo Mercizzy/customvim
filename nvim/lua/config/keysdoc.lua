@@ -50,7 +50,7 @@ local SECTIONS = {
     },
   },
   {
-    title = 'Git · git.nvim + gitsigns',
+    title = 'Git · git.nvim + gitsigns + LazyGit',
     rows = {
       { 'Space gs', ':Git status' },
       { 'Space gc', ':Git commit' },
@@ -59,6 +59,8 @@ local SECTIONS = {
       { 'Space gd', ':Git diff' },
       { 'Space gl', ':Git log' },
       { 'Space gb', ':Git blame' },
+      { 'Space gg', 'LazyGit（浮窗，推荐）' },
+      { 'Space gG', 'LazyGit（全屏标签）' },
       { ']c / [c', '跳到下一个 / 上一个改动块' },
       { 'Space hp', '预览当前改动（gitsigns）' },
       { 'Space hr', '撤销当前改动（gitsigns）' },
